@@ -1,0 +1,417 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                            %
+%   W Z O R Z E C   S P R A W O Z D A N I A  %
+%                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,a4paper,oneside]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage[utf8]{inputenc}                                      
+\usepackage[OT4]{fontenc}      
+%\usepackage[T1]{fontenc}                            
+\usepackage[polish]{babel}                           
+\selectlanguage{polish}
+\usepackage{indentfirst}
+\usepackage{fancyvrb} 
+\usepackage[dvips]{graphicx}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{color}
+\usepackage{rotating}
+\usepackage{hyperref} 
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{ifpdf}
+\usepackage{mathtext} % polskie znaki w trybie matematycznym
+%\makeindex  % utworzenie skorowidza (w dokumencie pdf)
+\usepackage{lmodern}
+%\usepackage[osf]{libertine}
+\usepackage{filecontents}
+\usepackage{ifthen}
+\usepackage{spverbatim}
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+
+\newcounter{nextYear}
+\setcounter{nextYear}{\the\year}
+\stepcounter{nextYear}
+
+% rozszerzenie nieco strony
+%\setlength{\topmargin}{-1cm} \setlength{\textheight}{24.5cm}
+%\setlength{\textwidth}{17cm} \addtolength{\hoffset}{-1.5cm}
+%\setlength{\parindent}{0.5cm} \setlength{\footskip}{2cm}
+%\linespread{1.2} % odstep pomiedzy wierszami
+
+
+%%%% ZYWA PAGINA %%%%%%%%%%%
+\newcommand{\tl}[1]{\textbf{#1}} 
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % usuwanie bieżących ustawień
+\fancyhead[L,R]{\small\bfseries\thepage}
+\fancyhead[L]{\small\bfseries\rightmark}
+\fancyhead[R]{\small\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
+\fancypagestyle{plain}{%
+\fancyhead{} % usuń p. górne na stronach pozbawionych numeracji
+\renewcommand{\headrulewidth}{0pt} % pozioma kreska
+}
+
+%%%%%   LISTINGI %%%%%%%%
+% ustawienia listingu programow
+
+\lstset{%
+language=C++,%
+commentstyle=\textit,%
+identifierstyle=\textsf,%
+keywordstyle=\sffamily\bfseries, %
+%captionpos=b,%
+tabsize=3,%
+frame=lines,%
+numbers=left,%
+numberstyle=\tiny,%
+numbersep=5pt,%
+breaklines=true,%
+morekeywords={pWezel,Wezel,string,ref,params_result},%
+escapeinside={(*@}{@*)},%
+%basicstyle=\footnotesize,%
+%keywords={double,int,for,if,return,vector,matrix,void,public,class,string,%
+%float,sizeof,char,FILE,while,do,const}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%  NOTKI NA MARGINESIE %%%%%%%%%%%%%
+% mala zmiana sposobu wyswietlania notek bocznych
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{%
+  {\linespread{0.85}\normalfont\scriptsize%
+\oldmarginpar[\hspace{1cm}\begin{minipage}{3cm}\raggedleft\scriptsize\color{black}\textsf{#1}\end{minipage}]%    left pages
+{\hspace{0cm}\begin{minipage}{3cm}\raggedright\scriptsize\color{black}\textsf{#1}\end{minipage}}% right pages
+}%
+}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+%%%% WYSWIETLANIE AKTUALNEGO ROKU AKADEMICKIEGO %%%%%%%%%%%
+\newcounter{rok}
+\newcommand{\rokakademicki}{%
+   \setcounter{rok}{\number\year}%
+   \ifthenelse{\number\month<10}%
+   {\addtocounter{rok}{-1}}% rok akademicki zaczal sie w pazdzierniku poprzedniego roku
+   {}%                       rok akademicki zaczyna sie w pazdzierniku tego roku
+   \arabic{rok}/\addtocounter{rok}{1}\arabic{rok}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% LISTA UWAG %%%%%%%%%
+\usepackage{color}
+\definecolor{brickred}      {cmyk}{0   , 0.89, 0.94, 0.28}
+
+\makeatletter \newcommand \kslistofremarks{\section*{Uwagi} \@starttoc{rks}}
+\newcommand\l@uwagas[2]
+{\par\noindent \textbf{#2:} %\parbox{10cm}
+   {#1}\par} \makeatother
+
+
+\newcommand{\ksremark}[1]{%
+   {{\color{brickred}{[#1]}}}%
+   \addcontentsline{rks}{uwagas}{\protect{#1}}%
+}
+
+\newcommand{\comma}{\ksremark{przecinek}}
+\newcommand{\nocomma}{\ksremark{bez przecinka}}
+\newcommand{\styl}{\ksremark{styl}}
+\newcommand{\ortografia}{\ksremark{ortografia}}
+\newcommand{\fleksja}{\ksremark{fleksja}}
+\newcommand{\pauza}{\ksremark{pauza `--', nie dywiz `-'}}
+\newcommand{\kolokwializm}{\ksremark{kolokwializm}}
+\newcommand{\cytowanie}{\ksremark{cytowanie}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% autor:
+\fancyhead[RE]{\small\bfseries Daniel Wiszowaty} % autor sprawozdania
+
+
+
+%%%%%%%%%%% NO I ZACZYNA SIE SPRAWOZDANIE %%%%%%%%%%%
+
+\begin{document}
+\frenchspacing
+\thispagestyle{empty}
+\begin{center}
+{\Large\sf Politechnika Śląska   % Alma Mater
+
+Wydział Informatyki, Elektroniki i Informatyki
+
+}
+
+\vfill
+
+ 
+
+\vfill\vfill
+
+{\Huge\sffamily\bfseries Programowanie Komputerów 3\par}  
+
+\vfill\vfill
+
+{\LARGE\sf Rezerwacje w kinie}   
+
+
+\vfill \vfill\vfill\vfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\begin{tabular}{ll}
+	\toprule
+	autor                       & Daniel Wiszowaty    \\
+	prowadzący                  & mgr. Grzegorz Wojciech Kwiatkowski  \\
+	rok akademicki              & \rokakademicki         \\
+	kierunek                    & informatyka            \\
+	rodzaj studiów              & SSI                    \\
+	semestr                     & 3                      \\
+	sekcja                      & 21                     \\
+	termin oddania sprawozdania & 2020-11-10             \\
+	git & \href{https://github.com/polsl-aei-pk3/aa44cccc-gr22-repo}{polsl-aei-pk3 / aa44cccc-gr22-repo} \\
+	\bottomrule
+	                            &
+\end{tabular}
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Treść zadania}
+\marginpar{}
+
+Zadanie polega na utworzeniu symulacji \texttt{obsługi rezerwacji w kinie}. Program umożliwia dodanie seansu, rezerwację i zakup biletów, wypisanie rezerwacji a także wypisywanie ich w zależności z uwzględnieniem daty oraz numeru sali.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analiza zadania}
+\marginpar{}
+
+Zagadnienie przedstawia problem \texttt{quasi-bazy danych}. 
+
+\subsection{Struktury danych}
+\marginpar{}
+W programie wykorzystano dwie listy jednokierunkowe. Pierwsza lista zawiera informacje o \texttt{sali}. Druga lista przechowuje informacje o rezerwacji tj. \texttt{dacie}, \texttt{sali}, \texttt{bilecie} i \texttt{nazwie filmu}. Taka struktura umożliwia sprawne zarządzanie rezerwacjami. \newline
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+
+\node at (1,7) [rectangle,draw] (Kowalska) {$18$};
+	\node at (5,7) [rectangle,draw] (Kamiński) {$26$};
+		\node at (9,7) [rectangle,draw] (Nowak) {$6$};
+		
+\draw[>=latex,->] (Kowalska) -- (Kamiński);
+\draw[>=latex,->] (Kamiński) -- (Nowak);
+
+\end{tikzpicture}
+\indent \caption{Przykład listy jednokierunkowej.}
+\label{fig:lista_jednokierunkowa}
+\end{figure} 
+
+
+
+\noindent Uważam, że strukturę można usprawnić zmieniając ją w \texttt{listę podwieszaną}. W ten sposób każda sala będzie miała swoją listę rezerwacji, co znacząco usprawni działanie programu.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+            
+%draw [help lines] grid (7,7);
+\node at (1,7) [rectangle,draw] (Kowalska) {$A$};
+	\node at (5,7) [rectangle,draw] (Kamiński) {$B$};
+		\node at (9,7) [rectangle,draw] (Nowak) {$C$};
+\node at (1, 5) [rectangle,draw] (A) {$15$};
+	\node at (1, 3) [rectangle,draw] (B) {$12$};
+			\node at (1, 1) [rectangle,draw] (C) {$17$};
+
+\node at (5, 5) [rectangle,draw] (E) {$4$};
+	\node at (5, 3) [rectangle,draw] (F) {$6$};
+	
+\node at (9, 5) [rectangle,draw] (G) {$13$};
+		\node at (9, 3) [rectangle,draw] (H) {$28$};
+			\node at (9, 1) [rectangle,draw] (I) {$18$};
+
+
+
+\draw[>=latex,->] (Kowalska) -- (Kamiński);
+\draw[>=latex,->] (Kamiński) -- (Nowak);
+\draw[>=latex,->] (Kowalska) -- (A);
+\draw[>=latex,->] (A) -- (B);
+\draw[>=latex,->] (B) -- (C);
+\draw[>=latex,->] (Kamiński) -- (E);
+\draw[>=latex,->] (E) -- (F);
+\draw[>=latex,->] (Nowak) -- (G);
+\draw[>=latex,->] (G) -- (H);
+\draw[>=latex,->] (H) -- (I);
+
+
+\end{tikzpicture}
+\caption{Przykład listy podwieszanej.}
+\label{fig:lista_podwieszana}
+\end{figure}
+
+
+\subsection{Algorytmy}
+\marginpar{}
+Program dodaje rezerwacje do listy jednokierunkowej uwzględniając, żeby nie utworzyć dwóch sal o tej samej dacie i jej unikalnym numerze. Wypisywanie list odbywa się poprzez iteracyjne przejście, z przeładowaną funkcją, uwzględniającą datę i nazwę filmu. \cite{id:PPK}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Specyfikacja zewnętrzna}
+\marginpar{}
+
+Program jest uruchamiany z konsoli.
+Przy uruchomieniu programu pojawia się menu:
+\begin{verbatim}
+Witaj w programie do obslugi rezerwacji kin           
+______________________________________________________
+
+Obslugiwane komendy:                                  
+instrukcja                                            
+zapisz <nazwapliku>                                   
+odczytaj <nazwapliku>                                   
+wyjdz                                                 
+dodajFilm <data> <sala> <nazwaFilmu>                  
+dodajFilm <data> <sala> <nazwaFilmu>                  
+zabookuj <rzad> <kolumna> <data> <nazwaFilmu>         
+kup <rzad> <kolumna> <data> <nazwaFilmu>              
+odbookuj <rzad> <kolumna> <data> <nazwaFilmu>         
+wypiszSale                                                 
+rezerwacje [<data>] [<nazwaFilmu>]             
+
+\end{verbatim}
+
+\begin{Verbatim}[fontsize=\small]
+instrukcja
+\end{Verbatim}
+powoduje wyświetlenie instrukcji. \newline
+
+\begin{Verbatim}[fontsize=\small]
+zapisz <nazwapliku>
+\end{Verbatim}
+powoduje zapis całego programu do pliku przekazanego przez argument \texttt{nazwapliku}. \newline
+
+\begin{Verbatim}[fontsize=\small]
+odczytaj <nazwapliku>
+\end{Verbatim}
+powoduje odczyt z pliku przekazanego przez argument \texttt{nazwapliku}. \newline
+
+\begin{Verbatim}[fontsize=\small]
+wyjdz
+\end{Verbatim}
+powoduje koniec programu. \newline
+
+\begin{Verbatim}[fontsize=\small]
+dodajFilm <data> <sala> <nazwaFilmu>                  
+\end{Verbatim}
+powoduje dodanie nowego filmu z datą, salą i nazwą przekazaną przez argumenty \texttt{data}, \texttt{sala} i \texttt{nazwaFilmu}. \newline
+
+\begin{Verbatim}[fontsize=\small]
+usunFilm <data> <sala> <nazwaFilmu>                  
+\end{Verbatim}
+powoduje usunięcie filmu z datą, salą i nazwą przekazaną przez argumenty \texttt{data}, \texttt{sala} i \texttt{nazwaFilmu}. \newline
+
+\begin{Verbatim}[fontsize=\small]
+zabookuj <rzad> <kolumna> <data> <nazwaFilmu>         
+\end{Verbatim}
+powoduje zarezerwowanie biletu na film o nazwie \texttt{nazwaFilmu} na fotelu przekazanym przez argumenty \texttt{rzad} i \texttt{kolumna} z datą \texttt{data}. \newline
+
+\begin{Verbatim}[fontsize=\small]
+kup <rzad> <kolumna> <data> <nazwaFilmu>              
+\end{Verbatim}
+powoduje kupienie biletu na film o nazwie \texttt{nazwaFilmu} na fotelu przekazanym przez argumenty \texttt{rzad} i \texttt{kolumna} z datą \texttt{data}. \newline
+
+\begin{Verbatim}[fontsize=\small]
+odbookuj <rzad> <kolumna> <data> <nazwaFilmu>         
+\end{Verbatim}
+powoduje usunięcie rezerwacji na film o nazwie \texttt{nazwaFilmu} na fotelu przekazanym przez argumenty \texttt{rzad} i \texttt{kolumna} z datą \texttt{data}. \newline
+
+\begin{Verbatim}[fontsize=\small]
+wypiszSale                                                 
+\end{Verbatim}
+powoduje wypisanie na konsolę wszystkich sal filmowych. \newline
+
+\begin{Verbatim}[fontsize=\small]
+rezerwacje [<data>] [<nazwaFilmu>]                                                            
+\end{Verbatim}
+powoduje wypisanie na konsolę wszystkich rezerwacji z opcjonalnymi parametrami \texttt{data} i \texttt{nazwaFilmu}.
+
+
+\subsection{Szczegółowy opis typów i funkcji}
+
+Szczegółowy opis typów i funkcji zawarty jest w załączniku. 
+
+\section{Testowanie}
+\marginpar{}
+
+Program został sprawdzony pod kątem wycieków pamięci przy użyciu biblioteki \texttt{nvwa} i \texttt{-fsanitize=leak} (biblioteki Clang).
+
+
+\section{Wnioski}
+\marginpar{}
+Program do obsługi rezerwacji nie był programem trudnym, ale kluczowe było zastosowanie odpowiednich struktur.
+
+ 
+\begin{filecontents}{bibliografia.bib}
+@misc{id:PPK,
+title = {Wykłady z podstaw programowania komputer\'ow},
+author = {Krzysztof Simiński},
+}
+
+\end{filecontents}
+
+
+\bibliographystyle{plplain}
+\bibliography{bibliografia}
+
+ 
+\cleardoublepage
+
+\rule{0cm}{0cm}
+
+\vfill
+
+\begin{center}
+\Huge\bfseries Dodatek\\Szczegółowy opis typów i~funkcji\par
+\end{center}
+
+\vfill 
+
+\rule{0cm}{0cm}
+
+\end{document}
+% Koniec wieńczy dzieło.
